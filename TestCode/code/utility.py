@@ -47,7 +47,8 @@ class checkpoint():
 
         if args.load == '.':
             if args.save == '.': args.save = now
-            self.dir = '../SR/' + args.degradation + '/' + args.save
+            localpath = str(os.path.dirname(os.path.abspath(__file__))).replace("\\", "/")
+            self.dir = localpath + '/SR/' + args.degradation + '/' + args.save
         else:
             self.dir = '../experiment/' + args.load
             if not os.path.exists(self.dir):
@@ -57,7 +58,10 @@ class checkpoint():
                 print('Continue from epoch {}...'.format(len(self.log)))
 
         if args.reset:
-            os.system('rm -rf ' + self.dir)
+            try:
+                os.rmdir(self.dir)
+            except OSError:
+                print("Can not delete unexisting dir" + str(self.dir))
             args.load = '.'
 
         def _make_dir(path):

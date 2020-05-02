@@ -1,0 +1,8 @@
+matplotlib
+scikit-image
+tqdm
+pytorch=0.4.1
+cuda92
+pytorch
+pillow=6.1
+scipy==1.1.0

@@ -25,14 +25,16 @@ class MyImage(data.Dataset):
         self.filelist = []
         self.imnamelist = []
         if not train:
+            print("searching path %s" % apath)
             for f in os.listdir(apath):
                 try:
                     filename = os.path.join(apath, f)
                     misc.imread(filename)
                     self.filelist.append(filename)
                     self.imnamelist.append(f)
-                except:
-                    pass
+                    print("added file", filename)
+                except Exception as exc:
+                    print("MyImage:", exc)
 
     def __getitem__(self, idx):
         filename = os.path.split(self.filelist[idx])[-1]
